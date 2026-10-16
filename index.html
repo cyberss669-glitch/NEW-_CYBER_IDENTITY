@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO & Open Graph Meta Tags -->
+  <title>NEW CYBER IDENTITY - 100GB Cyber Vault & Access Manager</title>
+  <meta name="description" content="Akses Vault Digital NEW CYBER IDENTITY berkapasitas 100GB dengan proteksi Enkripsi Cyberpunk Obsidian, visualizer audio synthwave, generator QR Code, dan beautifier link.">
+  <meta name="keywords" content="NEW CYBER IDENTITY, Cyber Vault, Storage 100GB, Cyberpunk Manager, Vault Akses, Cloud Storage">
+  <meta name="author" content="NEW CYBER IDENTITY">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://newcyberidentity.cyber.vault">
+  <meta property="og:title" content="NEW CYBER IDENTITY - 100GB Cyber Vault & Access Manager">
+  <meta property="og:description" content="Penyimpanan Obsidian Futuristik 100GB & Pengelola Akses Cyber Enkripsi Tinggi NEW CYBER IDENTITY.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80">
+
+  <!-- Fonts & Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            orbitron: ['Orbitron', 'sans-serif'],
+            rajdhani: ['Rajdhani', 'sans-serif'],
+            mono: ['"Share Tech Mono"', 'monospace']
+          },
+          colors: {
+            obsidian: {
+              DEFAULT: '#02040a',
+              light: '#0a0f1d',
+              card: 'rgba(10, 18, 38, 0.75)',
+              border: '#1a2942'
+            },
+            cyber: {
+              cyan: '#00f0ff',
+              pink: '#ff007f',
+              purple: '#8a2be2',
+              yellow: '#ffe600',
+              green: '#00ff66'
+            }
+          },
+          boxShadow: {
+            'neon-cyan': '0 0 15px rgba(0, 240, 255, 0.4), 0 0 30px rgba(0, 240, 255, 0.2)',
+            'neon-pink': '0 0 15px rgba(255, 0, 127, 0.4), 0 0 30px rgba(255, 0, 127, 0.2)',
+            'neon-purple': '0 0 15px rgba(138, 43, 226, 0.4), 0 0 30px rgba(138, 43, 226, 0.2)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #02040a; }
+    ::-webkit-scrollbar-thumb { background: #00f0ff; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #ff007f; }
+
+    /* Scanlines effect */
+    .scanlines {
+      background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%, 
+        rgba(0, 0, 0, 0.25) 50%
+      ), linear-gradient(
+        90deg,
+        rgba(255, 0, 0, 0.03),
+        rgba(0, 255, 0, 0.01),
+        rgba(0, 0, 255, 0.03)
+      );
+      background-size: 100% 3px, 6px 100%;
+      pointer-events: none;
+    }
+
+    /* Cyber Glow Text & Borders */
+    .text-glow-cyan { text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff; }
+    .text-glow-pink { text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f; }
+    .border-glow-cyan { box-shadow: 0 0 12px rgba(0, 240, 255, 0.5); }
+    
+    /* Cyber Clip Paths */
+    .clip-cyber-btn {
+      clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+    }
+    .clip-cyber-card {
+      clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+    }
+  </style>
+</head>
+<body class="bg-obsidian text-slate-200 font-rajdhani min-h-screen overflow-x-hidden relative selection:bg-cyber-pink selection:text-white">
+
+  <!-- Interactive Matrix Background -->
+  <canvas id="matrixCanvas" class="fixed top-0 left-0 w-full h-full z-0 pointer-events-none opacity-40"></canvas>
+  <div class="fixed top-0 left-0 w-full h-full scanlines z-10 opacity-70"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="fixed top-5 right-5 z-50 flex flex-col gap-3 max-w-sm w-full pointer-events-none"></div>
+
+  <!-- Main Application Wrapper -->
+  <div class="relative z-20 min-h-screen flex flex-col">
+
+    <!-- Header Navigation Bar -->
+    <header class="border-b border-cyber-cyan/30 bg-obsidian-light/80 backdrop-blur-md px-4 lg:px-8 py-3 sticky top-0 z-40">
+      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+        
+        <!-- Brand Identity: NEW CYBER IDENTITY -->
+        <div class="flex items-center gap-3">
+          <div class="relative flex items-center justify-center w-11 h-11 bg-obsidian border border-cyber-cyan rounded-lg text-cyber-cyan shadow-neon-cyan overflow-hidden group">
+            <i class="fa-solid font-mono text-xl fa-fingerprint group-hover:scale-110 transition-transform"></i>
+            <div class="absolute inset-0 bg-cyber-cyan/20 animate-pulse"></div>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h1 class="font-orbitron font-extrabold text-lg sm:text-xl text-transparent bg-clip-text bg-gradient-to-r from-cyber-cyan via-white to-cyber-pink tracking-wider">
+                NEW CYBER IDENTITY
+              </h1>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyber-pink/20 text-cyber-pink border border-cyber-pink/40">v4.0.0</span>
+            </div>
+            <p class="text-xs font-mono text-slate-400">100GB CYBER VAULT & ACCESS MANAGER</p>
+          </div>
+        </div>
+
+        <!-- System Stats Indicator -->
+        <div class="hidden md:flex items-center gap-6 font-mono text-xs border border-cyber-cyan/20 px-4 py-1.5 rounded-full bg-obsidian/60">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-cyber-green animate-ping"></span>
+            <span class="text-slate-400">STATUS:</span>
+            <span class="text-cyber-green font-semibold">ENCRYPTED ONLINE</span>
+          </div>
+          <div class="text-slate-500">|</div>
+          <div>
+            <span class="text-slate-400">VAULT LOAD:</span>
+            <span id="headerStorageUsed" class="text-cyber-cyan font-semibold">0.00 GB</span> / <span class="text-slate-400">100 GB</span>
+          </div>
+        </div>
+
+        <!-- Auth Controls -->
+        <div id="authHeaderBar" class="flex items-center gap-3">
+          <!-- Populated dynamically by JS -->
+        </div>
+
+      </div>
+    </header>
+
+    <!-- Main Dynamic Content Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+
+      <!-- ========================================== -->
+      <!-- AUTHENTICATION SECTION (LOGIN / REGISTER)  -->
+      <!-- ========================================== -->
+      <section id="authSection" class="max-w-md mx-auto my-8 sm:my-12">
+        <div class="bg-obsidian-card border border-cyber-cyan/40 rounded-2xl p-6 sm:p-8 shadow-neon-cyan backdrop-blur-xl relative overflow-hidden clip-cyber-card">
+          <div class="absolute -top-10 -right-10 w-32 h-32 bg-cyber-cyan/10 rounded-full blur-2xl"></div>
+          
+          <!-- Auth Tabs -->
+          <div class="flex border-b border-slate-800 mb-6 font-orbitron text-sm">
+            <button id="tabLoginBtn" onclick="switchAuthTab('login')" class="flex-1 py-3 text-center border-b-2 border-cyber-cyan text-cyber-cyan font-bold transition-all">
+              <i class="fa-solid fa-key mr-2"></i>MASUK
+            </button>
+            <button id="tabRegisterBtn" onclick="switchAuthTab('register')" class="flex-1 py-3 text-center border-b-2 border-transparent text-slate-400 hover:text-slate-200 font-bold transition-all">
+              <i class="fa-solid fa-user-plus mr-2"></i>DAFTAR
+            </button>
+          </div>
+
+          <!-- LOGIN FORM -->
+          <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
+            <div class="text-center mb-4">
+              <h2 class="font-orbitron text-xl text-white font-bold tracking-wide">AKSES TERMINAL NEW CYBER IDENTITY</h2>
+              <p class="text-xs text-slate-400 font-mono mt-1">Masukkan kredensial terenkripsi untuk membuka 100GB Vault</p>
+            </div>
+
+            <div>
+              <label class="block text-xs font-mono text-cyber-cyan mb-1">ID AKUN / USERNAME</label>
+              <div class="relative">
+                <i class="fa-solid fa-user-shield absolute left-3 top-3.5 text-slate-500 text-sm"></i>
+                <input type="text" id="loginUsername" required placeholder="Contoh: cyber_user" 
+                       class="w-full bg-obsidian border border-slate-700 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-cyber-cyan focus:ring-1 focus:ring-cyber-cyan font-mono">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-mono text-cyber-cyan mb-1">KATA SANDI (PASSCODE)</label>
+              <div class="relative">
+                <i class="fa-solid fa-lock absolute left-3 top-3.5 text-slate-500 text-sm"></i>
+                <input type="password" id="loginPassword" required placeholder="••••••••" 
+                       class="w-full bg-obsidian border border-slate-700 rounded-lg py-2.5 pl-10 pr-10 text-sm text-white focus:outline-none focus:border-cyber-cyan focus:ring-1 focus:ring-cyber-cyan font-mono">
+                <button type="button" onclick="togglePasswordVisibility('loginPassword', 'loginPassEye')" class="absolute right-3 top-3 text-slate-400 hover:text-cyber-cyan focus:outline-none">
+                  <i id="loginPassEye" class="fa-solid fa-eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-center text-xs font-mono">
+              <label class="flex items-center text-slate-400 cursor-pointer">
+                <input type="checkbox" id="rememberMe" class="accent-cyber-cyan mr-2"> Ingat Sesi Ini
+              </label>
+              <button type="button" onclick="showForgotPasswordModal()" class="text-cyber-pink hover:underline">Lupa Passcode?</button>
+            </div>
+
+            <button type="submit" class="w-full py-3 bg-gradient-to-r from-cyber-cyan to-cyber-purple text-obsidian font-orbitron font-bold text-sm tracking-widest clip-cyber-btn hover:brightness-125 transition-all shadow-neon-cyan mt-2">
+              DESIFRASI & MASUK <i class="fa-solid fa-arrow-right-to-bracket ml-2"></i>
+            </button>
+          </form>
+
+          <!-- REGISTER FORM -->
+          <form id="registerForm" onsubmit="handleRegister(event)" class="space-y-4 hidden">
+            <div class="text-center mb-4">
+              <h2 class="font-orbitron text-xl text-white font-bold tracking-wide">BUAT NEW CYBER IDENTITY</h2>
+              <p class="text-xs text-slate-400 font-mono mt-1">Dapatkan alokasi 100GB Obsidian Cloud Storage Anda</p>
+            </div>
+
+            <div>
+              <label class="block text-xs font-mono text-cyber-pink mb-1">NAMA LENGKAP / ALIAS</label>
+              <div class="relative">
+                <i class="fa-solid fa-id-card absolute left-3 top-3.5 text-slate-500 text-sm"></i>
+                <input type="text" id="regFullName" required placeholder="New Cyber User" 
+                       class="w-full bg-obsidian border border-slate-700 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-cyber-pink focus:ring-1 focus:ring-cyber-pink font-mono">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-mono text-cyber-pink mb-1">USERNAME CYBER</label>
+              <div class="relative">
+                <i class="fa-solid fa-at absolute left-3 top-3.5 text-slate-500 text-sm"></i>
+                <input type="text" id="regUsername" required placeholder="cyber_identity" 
+                       class="w-full bg-obsidian border border-slate-700 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-cyber-pink focus:ring-1 focus:ring-cyber-pink font-mono">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-mono text-cyber-pink mb-1">KATA SANDI BARU</label>
+              <div class="relative">
+                <i class="fa-solid fa-key absolute left-3 top-3.5 text-slate-500 text-sm"></i>
+                <input type="password" id="regPassword" required minlength="6" placeholder="Minimal 6 karakter" 
+                       class="w-full bg-obsidian border border-slate-700 rounded-lg py-2.5 pl-10 pr-10 text-sm text-white focus:outline-none focus:border-cyber-pink focus:ring-1 focus:ring-cyber-pink font-mono">
+                <button type="button" onclick="togglePasswordVisibility('regPassword', 'regPassEye')" class="absolute right-3 top-3 text-slate-400 hover:text-cyber-pink focus:outline-none">
+                  <i id="regPassEye" class="fa-solid fa-eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <button type="submit" class="w-full py-3 bg-gradient-to-r from-cyber-pink to-cyber-purple text-white font-orbitron font-bold text-sm tracking-widest clip-cyber-btn hover:brightness-125 transition-all shadow-neon-pink mt-2">
+              REGISTRASI & ALOKASI VAULT <i class="fa-solid fa-user-check ml-2"></i>
+            </button>
+          </form>
+
+        </div>
+      </section>
+
+
+      <!-- ========================================== -->
+      <!-- VAULT DASHBOARD (LOGGED IN STATE)         -->
+      <!-- ========================================== -->
+      <div id="vaultDashboard" class="hidden space-y-8">
+        
+        <!-- Welcome Banner & Profile Card -->
+        <div class="bg-obsidian-card border border-cyber-cyan/30 rounded-2xl p-6 relative overflow-hidden backdrop-blur-xl flex flex-col lg:flex-row items-center justify-between gap-6 shadow-neon-cyan">
+          <div class="flex items-center gap-5 w-full lg:w-auto">
+            <div class="relative group cursor-pointer" onclick="openAvatarModal()" title="Ubah Foto Profil">
+              <img id="userAvatarImg" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=150&q=80" 
+                   alt="Avatar" class="w-20 h-20 rounded-xl object-cover border-2 border-cyber-cyan shadow-neon-cyan">
+              <div class="absolute inset-0 bg-black/60 rounded-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <i class="fa-solid fa-camera text-cyber-cyan text-xl"></i>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-3">
+                <h2 id="userDisplayName" class="font-orbitron text-2xl font-bold text-white">NEW CYBER IDENTITY</h2>
+                <span id="userBadge" class="text-xs font-mono bg-cyber-purple/30 text-cyber-cyan border border-cyber-cyan/50 px-2.5 py-0.5 rounded-full">VAULT OWNER</span>
+              </div>
+              <p id="userIdText" class="text-xs font-mono text-slate-400 mt-1">ID Akses: NCI-9900-OBSIDIAN</p>
+              <div class="flex gap-2 mt-3">
+                <button onclick="openAvatarModal()" class="text-xs font-mono px-3 py-1 bg-obsidian border border-slate-700 hover:border-cyber-cyan rounded text-slate-300 transition-all">
+                  <i class="fa-solid fa-user-pen mr-1"></i> Edit Profil
+                </button>
+                <button onclick="openChangePasswordModal()" class="text-xs font-mono px-3 py-1 bg-obsidian border border-slate-700 hover:border-cyber-pink rounded text-slate-300 transition-all">
+                  <i class="fa-solid fa-lock-open mr-1"></i> Ganti Password
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Realtime Storage Meter -->
+          <div class="w-full lg:w-96 bg-obsidian/80 border border-slate-800 p-4 rounded-xl font-mono">
+            <div class="flex justify-between text-xs mb-2">
+              <span class="text-slate-400"><i class="fa-solid fa-hard-drive text-cyber-cyan mr-1"></i> Kapasitas Vault 100GB</span>
+              <span id="storagePercentText" class="text-cyber-cyan font-bold">0.00%</span>
+            </div>
+            <div class="w-full bg-slate-900 h-3 rounded-full overflow-hidden p-0.5 border border-slate-700">
+              <div id="storageProgressBar" class="bg-gradient-to-r from-cyber-cyan via-cyber-purple to-cyber-pink h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+            <div class="flex justify-between text-[11px] text-slate-400 mt-2">
+              <span>Terpakai: <strong id="usedCapacityText" class="text-white">0 MB</strong></span>
+              <span>Sisa: <strong id="freeCapacityText" class="text-cyber-green">100.00 GB</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="flex flex-wrap gap-2 border-b border-slate-800 pb-2 font-orbitron text-sm">
+          <button id="navVaultBtn" onclick="switchMainTab('vault')" class="px-5 py-2.5 rounded-lg bg-cyber-cyan/20 border border-cyber-cyan text-cyber-cyan font-bold transition-all">
+            <i class="fa-solid fa-vault mr-2"></i> 100GB FILE VAULT
+          </button>
+          <button id="navBeautifierBtn" onclick="switchMainTab('beautifier')" class="px-5 py-2.5 rounded-lg bg-obsidian border border-slate-800 text-slate-400 hover:text-white transition-all">
+            <i class="fa-solid fa-link mr-2"></i> LINK BEAUTIFIER
+          </button>
+          <button id="navQrBtn" onclick="switchMainTab('qr')" class="px-5 py-2.5 rounded-lg bg-obsidian border border-slate-800 text-slate-400 hover:text-white transition-all">
+            <i class="fa-solid fa-qrcode mr-2"></i> CYBER QR GENERATOR
+          </button>
+        </div>
+
+        <!-- TAB CONTENT 1: FILE VAULT MANAGER -->
+        <div id="tabContentVault" class="space-y-6">
+          
+          <!-- Drop Zone -->
+          <div id="dropZone" 
+               class="border-2 border-dashed border-cyber-cyan/40 hover:border-cyber-cyan bg-obsidian-card/50 rounded-2xl p-8 text-center backdrop-blur-md cursor-pointer transition-all hover:bg-cyber-cyan/5 group"
+               onclick="document.getElementById('fileInput').click()"
+               ondragover="handleDragOver(event)"
+               ondragleave="handleDragLeave(event)"
+               ondrop="handleFileDrop(event)">
+            
+            <input type="file" id="fileInput" multiple class="hidden" onchange="uploadFiles(this.files)">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-cyber-cyan/10 border border-cyber-cyan flex items-center justify-center text-cyber-cyan text-2xl group-hover:scale-110 transition-transform shadow-neon-cyan">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+            </div>
+            <h3 class="font-orbitron font-bold text-lg text-white">UNGGAH BERKAS KE NEW CYBER IDENTITY VAULT</h3>
+            <p class="text-xs font-mono text-slate-400 mt-1 max-w-md mx-auto">
+              Tarik & Lepas file di sini atau klik untuk menjelajah. Mendukung Video HD, Musik (Visualizer Wave), Foto, dan Dokumen Teks.
+            </p>
+            <div class="mt-4 inline-flex items-center gap-2 text-xs font-mono text-cyber-pink bg-cyber-pink/10 px-3 py-1 rounded-full border border-cyber-pink/30">
+              <i class="fa-solid fa-bolt"></i> IndexedDB Speed Engine Active
+            </div>
+          </div>
+
+          <!-- Search & Filter Bar -->
+          <div class="flex flex-col md:flex-row gap-4 items-center justify-between bg-obsidian-card p-4 rounded-xl border border-slate-800">
+            <div class="relative w-full md:w-72">
+              <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-500 text-sm"></i>
+              <input type="text" id="fileSearchInput" oninput="renderFileList()" placeholder="Cari nama berkas..." 
+                     class="w-full bg-obsidian border border-slate-700 rounded-lg py-2 pl-9 pr-4 text-xs font-mono text-white focus:outline-none focus:border-cyber-cyan">
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
+              <span class="text-xs font-mono text-slate-400 mr-1">Kategori:</span>
+              <button onclick="filterVault('all')" class="cat-btn px-3 py-1 text-xs font-mono rounded-lg bg-cyber-cyan text-obsidian font-bold">Semua</button>
+              <button onclick="filterVault('image')" class="cat-btn px-3 py-1 text-xs font-mono rounded-lg bg-obsidian border border-slate-800 text-slate-300">Foto</button>
+              <button onclick="filterVault('video')" class="cat-btn px-3 py-1 text-xs font-mono rounded-lg bg-obsidian border border-slate-800 text-slate-300">Video</button>
+              <button onclick="filterVault('audio')" class="cat-btn px-3 py-1 text-xs font-mono rounded-lg bg-obsidian border border-slate-800 text-slate-300">Musik</button>
+              <button onclick="filterVault('document')" class="cat-btn px-3 py-1 text-xs font-mono rounded-lg bg-obsidian border border-slate-800 text-slate-300">Dokumen</button>
+              
+              <select id="sortSelect" onchange="renderFileList()" class="bg-obsidian border border-slate-700 rounded-lg py-1 px-2 text-xs font-mono text-slate-300 focus:outline-none ml-auto">
+                <option value="newest">Terbaru</option>
+                <option value="oldest">Terlama</option>
+                <option value="size">Ukuran Terbesar</option>
+                <option value="name">Nama A-Z</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- File Grid Container -->
+          <div id="fileGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <!-- Files injected dynamically -->
+          </div>
+
+          <!-- Empty Vault State -->
+          <div id="emptyVaultMsg" class="hidden text-center py-16 bg-obsidian-card/30 rounded-2xl border border-dashed border-slate-800">
+            <i class="fa-solid fa-box-open text-4xl text-slate-600 mb-3"></i>
+            <h4 class="font-orbitron text-lg text-slate-400">Vault Masih Kosong</h4>
+            <p class="text-xs font-mono text-slate-500 mt-1">Belum ada file terenkripsi yang diunggah ke NEW CYBER IDENTITY storage ini.</p>
+          </div>
+
+        </div>
+
+        <!-- TAB CONTENT 2: LINK BEAUTIFIER -->
+        <div id="tabContentBeautifier" class="hidden max-w-2xl mx-auto space-y-6">
+          <div class="bg-obsidian-card border border-cyber-cyan/30 rounded-2xl p-6 shadow-neon-cyan">
+            <h3 class="font-orbitron text-xl font-bold text-white mb-2"><i class="fa-solid fa-link text-cyber-cyan mr-2"></i>CYBER LINK BEAUTIFIER</h3>
+            <p class="text-xs font-mono text-slate-400 mb-6">Ubah URL panjang atau link berkas vault menjadi tautan kustom NEW CYBER IDENTITY.</p>
+
+            <form onsubmit="generateBeautifulLink(event)" class="space-y-4">
+              <div>
+                <label class="block text-xs font-mono text-cyber-cyan mb-1">URL ASLI (LONG URI)</label>
+                <input type="url" id="originalUrlInput" required placeholder="https://drive.google.com/file/d/..." 
+                       class="w-full bg-obsidian border border-slate-700 rounded-lg py-2.5 px-4 text-xs font-mono text-white focus:outline-none focus:border-cyber-cyan">
+              </div>
+
+              <div>
+                <label class="block text-xs font-mono text-cyber-pink mb-1">CUSTOM ALIAS / DOMAIN EFEK</label>
+                <div class="flex">
+                  <span class="bg-slate-900 border border-r-0 border-slate-700 rounded-l-lg px-3 py-2 text-xs font-mono text-slate-400 flex items-center">
+                    newcyberidentity.link/
+                  </span>
+                  <input type="text" id="customAliasInput" placeholder="rahasia-cyber" required
+                         class="w-full bg-obsidian border border-slate-700 rounded-r-lg py-2.5 px-4 text-xs font-mono text-white focus:outline-none focus:border-cyber-pink">
+                </div>
+              </div>
+
+              <button type="submit" class="w-full py-3 bg-gradient-to-r from-cyber-cyan to-cyber-purple text-obsidian font-orbitron font-bold text-sm tracking-wider rounded-lg shadow-neon-cyan hover:brightness-125 transition-all">
+                GENERASI LINK BEAUTIFIED <i class="fa-solid fa-wand-magic-sparkles ml-2"></i>
+              </button>
+            </form>
+
+            <div id="beautifiedResultBox" class="hidden mt-6 p-4 bg-obsidian rounded-xl border border-cyber-cyan">
+              <span class="text-xs font-mono text-slate-400 block mb-1">HASIL BEAUTIFIED LINK:</span>
+              <div class="flex items-center justify-between gap-2">
+                <input type="text" id="beautifiedOutput" readonly class="w-full bg-slate-900 text-cyber-cyan font-mono text-sm p-2 rounded border border-slate-800">
+                <button onclick="copyToClipboard('beautifiedOutput')" class="px-4 py-2 bg-cyber-cyan text-obsidian font-bold text-xs font-mono rounded hover:bg-white transition-all">
+                  SALIN <i class="fa-solid fa-copy ml-1"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB CONTENT 3: CYBER QR GENERATOR -->
+        <div id="tabContentQr" class="hidden max-w-2xl mx-auto space-y-6">
+          <div class="bg-obsidian-card border border-cyber-pink/30 rounded-2xl p-6 shadow-neon-pink">
+            <h3 class="font-orbitron text-xl font-bold text-white mb-2"><i class="fa-solid fa-qrcode text-cyber-pink mr-2"></i>HOLOGRAPHIC SVG QR GENERATOR</h3>
+            <p class="text-xs font-mono text-slate-400 mb-6">Buat QR Code bermotif NEW CYBER IDENTITY instan yang dapat diunduh langsung sebagai SVG.</p>
+
+            <div class="space-y-4">
+              <div>
+                <label class="block text-xs font-mono text-cyber-pink mb-1">TEKS / URL UNTUK QR CODE</label>
+                <input type="text" id="qrTextInput" placeholder="https://newcyberidentity.link/secret" value="https://newcyberidentity.cyber.vault" 
+                       class="w-full bg-obsidian border border-slate-700 rounded-lg py-2.5 px-4 text-xs font-mono text-white focus:outline-none focus:border-cyber-pink">
+              </div>
+
+              <button onclick="generateCyberQR()" class="w-full py-3 bg-gradient-to-r from-cyber-pink to-cyber-purple text-white font-orbitron font-bold text-sm tracking-wider rounded-lg shadow-neon-pink hover:brightness-125 transition-all">
+                GENERASI QR CODE <i class="fa-solid fa-qrcode ml-2"></i>
+              </button>
+            </div>
+
+            <div class="mt-6 flex flex-col items-center justify-center p-6 bg-obsidian rounded-xl border border-slate-800">
+              <div id="qrSvgWrapper" class="p-4 bg-obsidian border border-cyber-cyan rounded-xl shadow-neon-cyan mb-4">
+                <!-- SVG injected dynamically -->
+              </div>
+              <button onclick="downloadQrSvg()" class="px-5 py-2.5 bg-cyber-pink text-white font-orbitron font-bold text-xs rounded-lg shadow-neon-pink hover:brightness-125 transition-all">
+                UNDUH SVG QR CODE <i class="fa-solid fa-download ml-2"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 bg-obsidian-light/50 backdrop-blur-md py-6 px-4 text-center font-mono text-xs text-slate-500 mt-auto">
+      <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
+        <div>
+          &copy; 2026 <strong class="text-cyber-cyan">NEW CYBER IDENTITY</strong>. Hak Cipta Dilindungi.
+        </div>
+        <div class="flex gap-4">
+          <span class="text-cyber-pink"><i class="fa-solid fa-lock text-xs mr-1"></i> AES-256 ENCRYPTION</span>
+          <span class="text-cyber-cyan"><i class="fa-solid fa-server text-xs mr-1"></i> 100GB LOCAL VAULT</span>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+
+  <!-- MULTI-MEDIA VIEWER MODAL -->
+  <div id="mediaViewerModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex items-center justify-center p-4 hidden">
+    <div class="relative max-w-4xl w-full bg-obsidian-card border border-cyber-cyan rounded-2xl overflow-hidden shadow-neon-cyan flex flex-col max-h-[90vh]">
+      
+      <div class="p-4 border-b border-slate-800 flex justify-between items-center bg-obsidian/80">
+        <div class="flex items-center gap-3 overflow-hidden">
+          <span id="viewerTypeIcon" class="text-cyber-cyan text-lg"><i class="fa-solid fa-file"></i></span>
+          <h3 id="viewerTitle" class="font-orbitron font-bold text-sm text-white truncate max-w-md">Nama Berkas</h3>
+        </div>
+        <button onclick="closeMediaViewer()" class="text-slate-400 hover:text-cyber-pink text-xl focus:outline-none p-1">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="flex-1 overflow-auto p-4 flex flex-col items-center justify-center min-h-[300px] bg-obsidian/50 relative">
+        <div id="photoViewer" class="hidden flex-col items-center justify-center">
+          <img id="photoElem" src="" alt="Photo Preview" class="max-h-[60vh] object-contain rounded-lg border border-slate-800 transition-transform duration-200">
+          <div class="flex gap-3 mt-4">
+            <button onclick="adjustPhotoZoom(0.2)" class="px-3 py-1.5 bg-obsidian border border-slate-700 rounded text-xs font-mono text-slate-300 hover:border-cyber-cyan">
+              <i class="fa-solid fa-magnifying-glass-plus"></i> Zoom In
+            </button>
+            <button onclick="adjustPhotoZoom(-0.2)" class="px-3 py-1.5 bg-obsidian border border-slate-700 rounded text-xs font-mono text-slate-300 hover:border-cyber-cyan">
+              <i class="fa-solid fa-magnifying-glass-minus"></i> Zoom Out
+            </button>
+            <button onclick="rotatePhoto()" class="px-3 py-1.5 bg-obsidian border border-slate-700 rounded text-xs font-mono text-slate-300 hover:border-cyber-pink">
+              <i class="fa-solid fa-rotate-right"></i> Putar
+            </button>
+          </div>
+        </div>
+
+        <div id="videoViewer" class="hidden w-full max-w-3xl">
+          <video id="videoElem" controls class="w-full rounded-lg border border-slate-800 shadow-neon-cyan"></video>
+        </div>
+
+        <div id="audioViewer" class="hidden w-full max-w-xl flex-col items-center">
+          <div class="w-24 h-24 rounded-full bg-cyber-pink/10 border-2 border-cyber-pink flex items-center justify-center text-cyber-pink text-3xl mb-4 shadow-neon-pink animate-pulse">
+            <i class="fa-solid fa-music"></i>
+          </div>
+          <canvas id="audioVisualizerCanvas" width="500" height="100" class="w-full h-28 bg-obsidian border border-cyber-cyan/40 rounded-xl mb-4"></canvas>
+          <audio id="audioElem" controls class="w-full"></audio>
+        </div>
+
+        <div id="documentViewer" class="hidden w-full h-full max-h-[60vh] overflow-y-auto bg-obsidian p-4 rounded-xl border border-slate-800 font-mono text-xs text-slate-300 whitespace-pre-wrap">
+          <p id="documentTextContent">Memuat dokumen...</p>
+        </div>
+      </div>
+
+      <div class="p-4 border-t border-slate-800 bg-obsidian/80 flex justify-between items-center text-xs font-mono">
+        <span id="viewerMeta" class="text-slate-400">Ukuran: 0 MB</span>
+        <button id="viewerDownloadBtn" class="px-4 py-2 bg-cyber-cyan text-obsidian font-bold rounded-lg shadow-neon-cyan hover:brightness-125 transition-all">
+          <i class="fa-solid fa-download mr-1"></i> Unduh File
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- AVATAR MODAL -->
+  <div id="avatarModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="bg-obsidian-card border border-cyber-cyan/50 rounded-2xl p-6 max-w-md w-full shadow-neon-cyan">
+      <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
+        <h3 class="font-orbitron font-bold text-lg text-white"><i class="fa-solid fa-user-gear text-cyber-cyan mr-2"></i>UBAH FOTO PROFIL</h3>
+        <button onclick="closeAvatarModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <p class="text-xs font-mono text-slate-400 mb-4">Pilih Avatar Cyberpunk preset atau unggah gambar tersendiri:</p>
+
+      <div class="grid grid-cols-3 gap-3 mb-6">
+        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=150&q=80" onclick="selectPresetAvatar(this.src)" class="w-full h-20 rounded-xl object-cover border-2 border-transparent hover:border-cyber-cyan cursor-pointer transition-all">
+        <img src="https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=150&q=80" onclick="selectPresetAvatar(this.src)" class="w-full h-20 rounded-xl object-cover border-2 border-transparent hover:border-cyber-cyan cursor-pointer transition-all">
+        <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=150&q=80" onclick="selectPresetAvatar(this.src)" class="w-full h-20 rounded-xl object-cover border-2 border-transparent hover:border-cyber-cyan cursor-pointer transition-all">
+        <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=150&q=80" onclick="selectPresetAvatar(this.src)" class="w-full h-20 rounded-xl object-cover border-2 border-transparent hover:border-cyber-cyan cursor-pointer transition-all">
+        <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=150&q=80" onclick="selectPresetAvatar(this.src)" class="w-full h-20 rounded-xl object-cover border-2 border-transparent hover:border-cyber-cyan cursor-pointer transition-all">
+        <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=150&q=80" onclick="selectPresetAvatar(this.src)" class="w-full h-20 rounded-xl object-cover border-2 border-transparent hover:border-cyber-cyan cursor-pointer transition-all">
+      </div>
+
+      <div>
+        <label class="block text-xs font-mono text-cyber-cyan mb-1">UNGGAH FOTO DARI PERANGKAT</label>
+        <input type="file" id="customAvatarInput" accept="image/*" onchange="uploadCustomAvatar(event)" 
+               class="w-full bg-obsidian border border-slate-700 rounded-lg text-xs font-mono text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-cyber-cyan file:text-obsidian hover:file:brightness-110">
+      </div>
+    </div>
+  </div>
+
+
+  <!-- FORGOT PASSWORD MODAL -->
+  <div id="forgotPasswordModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="bg-obsidian-card border border-cyber-pink/50 rounded-2xl p-6 max-w-md w-full shadow-neon-pink">
+      <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
+        <h3 class="font-orbitron font-bold text-lg text-white"><i class="fa-solid fa-shield-cat text-cyber-pink mr-2"></i>RESET PASSCODE VAULT</h3>
+        <button onclick="closeForgotPasswordModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <form onsubmit="handleResetPassword(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-mono text-cyber-pink mb-1">USERNAME TERDAFTAR</label>
+          <input type="text" id="resetUsername" required placeholder="Masukkan username Anda" 
+                 class="w-full bg-obsidian border border-slate-700 rounded-lg py-2 px-3 text-xs font-mono text-white focus:outline-none focus:border-cyber-pink">
+        </div>
+
+        <div>
+          <label class="block text-xs font-mono text-cyber-pink mb-1">KATA SANDI (PASSCODE) BARU</label>
+          <div class="relative">
+            <input type="password" id="resetNewPass" required minlength="6" placeholder="Passcode baru" 
+                   class="w-full bg-obsidian border border-slate-700 rounded-lg py-2 pl-3 pr-10 text-xs font-mono text-white focus:outline-none focus:border-cyber-pink">
+            <button type="button" onclick="togglePasswordVisibility('resetNewPass', 'resetPassEye')" class="absolute right-3 top-2.5 text-slate-400 hover:text-cyber-pink">
+              <i id="resetPassEye" class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-2.5 bg-cyber-pink text-white font-orbitron font-bold text-xs rounded-lg shadow-neon-pink hover:brightness-125 transition-all">
+          PERBARUI PASSCODE NOW
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- CHANGE PASSWORD MODAL -->
+  <div id="changePasswordModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="bg-obsidian-card border border-cyber-cyan/50 rounded-2xl p-6 max-w-md w-full shadow-neon-cyan">
+      <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
+        <h3 class="font-orbitron font-bold text-lg text-white"><i class="fa-solid fa-key text-cyber-cyan mr-2"></i>GANTI PASSCODE SESI</h3>
+        <button onclick="closeChangePasswordModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <form onsubmit="handleChangePassword(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-mono text-cyber-cyan mb-1">KATA SANDI SAAT INI</label>
+          <div class="relative">
+            <input type="password" id="currPassInput" required placeholder="••••••••" 
+                   class="w-full bg-obsidian border border-slate-700 rounded-lg py-2 pl-3 pr-10 text-xs font-mono text-white focus:outline-none focus:border-cyber-cyan">
+            <button type="button" onclick="togglePasswordVisibility('currPassInput', 'currEye')" class="absolute right-3 top-2.5 text-slate-400 hover:text-cyber-cyan">
+              <i id="currEye" class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-mono text-cyber-cyan mb-1">KATA SANDI BARU</label>
+          <div class="relative">
+            <input type="password" id="newPassInput" required minlength="6" placeholder="Minimal 6 karakter" 
+                   class="w-full bg-obsidian border border-slate-700 rounded-lg py-2 pl-3 pr-10 text-xs font-mono text-white focus:outline-none focus:border-cyber-cyan">
+            <button type="button" onclick="togglePasswordVisibility('newPassInput', 'newEye')" class="absolute right-3 top-2.5 text-slate-400 hover:text-cyber-cyan">
+              <i id="newEye" class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-2.5 bg-cyber-cyan text-obsidian font-orbitron font-bold text-xs rounded-lg shadow-neon-cyan hover:brightness-125 transition-all">
+          SIMPAN PASSCODE BARU
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- JavaScript Application Logic -->
+  <script>
+    const TOTAL_STORAGE_BYTES = 100 * 1024 * 1024 * 1024; // 100 GB
+    let currentUser = null;
+    let vaultFiles = [];
+    let currentFilterCategory = 'all';
+    let photoZoomScale = 1;
+    let photoRotationDeg = 0;
+
+    // IndexedDB setup
+    let db;
+    const request = indexedDB.open('NewCyberIdentityDB', 1);
+    request.onupgradeneeded = (e) => {
+      db = e.target.result;
+      if (!db.objectStoreNames.contains('files')) {
+        db.createObjectStore('files', { keyPath: 'id' });
+      }
+      if (!db.objectStoreNames.contains('users')) {
+        db.createObjectStore('users', { keyPath: 'username' });
+      }
+    };
+    request.onsuccess = (e) => {
+      db = e.target.result;
+      checkExistingSession();
+    };
+    request.onerror = (e) => console.error("IndexedDB initialization error", e);
+
+    // Tone.js Sound Synthesizer
+    const synth = new Tone.Synth().toDestination();
+    function playSfx(type) {
+      try {
+        if (Tone.context.state !== 'running') Tone.start();
+        if (type === 'click') synth.triggerAttackRelease("C5", "16n");
+        if (type === 'success') synth.triggerAttackRelease("E5", "8n");
+        if (type === 'error') synth.triggerAttackRelease("A3", "8n");
+        if (type === 'upload') synth.triggerAttackRelease("G5", "12n");
+      } catch(e) {}
+    }
+
+    // Matrix Rain Canvas Animation
+    const matrixCanvas = document.getElementById('matrixCanvas');
+    const ctx = matrixCanvas.getContext('2d');
+
+    function resizeCanvas() {
+      matrixCanvas.width = window.innerWidth;
+      matrixCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const chars = '01NEW_CYBER_IDENTITY_100GB_VAULT_SYSTEM_OBSIDIAN_';
+    const fontSize = 13;
+    const columns = Math.floor(window.innerWidth / fontSize) + 1;
+    const drops = Array(columns).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(2, 4, 10, 0.08)';
+      ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+
+      ctx.fillStyle = '#00f0ff';
+      ctx.font = fontSize + 'px "Share Tech Mono"';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars.charAt(Math.floor(Math.random() * chars.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+    setInterval(drawMatrix, 40);
+
+    // Password Visibility Toggle
+    function togglePasswordVisibility(inputId, eyeIconId) {
+      const input = document.getElementById(inputId);
+      const eye = document.getElementById(eyeIconId);
+      if (input.type === 'password') {
+        input.type = 'text';
+        eye.classList.remove('fa-eye');
+        eye.classList.add('fa-eye-slash');
+      } else {
+        input.type = 'password';
+        eye.classList.remove('fa-eye-slash');
+        eye.classList.add('fa-eye');
+      }
+      playSfx('click');
+    }
+
+    // Auth Tab Switcher
+    function switchAuthTab(tab) {
+      playSfx('click');
+      const loginForm = document.getElementById('loginForm');
+      const regForm = document.getElementById('registerForm');
+      const tabLoginBtn = document.getElementById('tabLoginBtn');
+      const tabRegisterBtn = document.getElementById('tabRegisterBtn');
+
+      if (tab === 'login') {
+        loginForm.classList.remove('hidden');
+        regForm.classList.add('hidden');
+        tabLoginBtn.className = 'flex-1 py-3 text-center border-b-2 border-cyber-cyan text-cyber-cyan font-bold transition-all';
+        tabRegisterBtn.className = 'flex-1 py-3 text-center border-b-2 border-transparent text-slate-400 hover:text-slate-200 font-bold transition-all';
+      } else {
+        loginForm.classList.add('hidden');
+        regForm.classList.remove('hidden');
+        tabRegisterBtn.className = 'flex-1 py-3 text-center border-b-2 border-cyber-pink text-cyber-pink font-bold transition-all';
+        tabLoginBtn.className = 'flex-1 py-3 text-center border-b-2 border-transparent text-slate-400 hover:text-slate-200 font-bold transition-all';
+      }
+    }
+
+    // Registration Handler
+    function handleRegister(e) {
+      e.preventDefault();
+      const fullName = document.getElementById('regFullName').value.trim();
+      const username = document.getElementById('regUsername').value.trim().toLowerCase();
+      const password = document.getElementById('regPassword').value;
+
+      const tx = db.transaction('users', 'readwrite');
+      const store = tx.objectStore('users');
+      const getReq = store.get(username);
+
+      getReq.onsuccess = () => {
+        if (getReq.result) {
+          showToast('Username sudah terdaftar! Pilih username lain.', 'error');
+          playSfx('error');
+          return;
+        }
+
+        const newUser = {
+          username,
+          fullName,
+          password,
+          avatar: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=150&q=80',
+          accessId: 'NCI-' + Math.floor(1000 + Math.random() * 9000) + '-OBSIDIAN'
+        };
+
+        store.add(newUser);
+        showToast('NEW CYBER IDENTITY Berhasil Dibuat! Silakan Masuk.', 'success');
+        playSfx('success');
+        switchAuthTab('login');
+      };
+    }
+
+    // Login Handler
+    function handleLogin(e) {
+      e.preventDefault();
+      const username = document.getElementById('loginUsername').value.trim().toLowerCase();
+      const password = document.getElementById('loginPassword').value;
+
+      // Default Admin Fallback
+      if (username === 'cyber_user' && password === 'admin123') {
+        const defaultUser = {
+          username: 'cyber_user',
+          fullName: 'NEW CYBER IDENTITY (Admin)',
+          avatar: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=150&q=80',
+          accessId: 'NCI-9900-OBSIDIAN'
+        };
+        saveSessionAndInitialize(defaultUser);
+        return;
+      }
+
+      const tx = db.transaction('users', 'readonly');
+      const store = tx.objectStore('users');
+      const getReq = store.get(username);
+
+      getReq.onsuccess = () => {
+        const user = getReq.result;
+        if (user && user.password === password) {
+          saveSessionAndInitialize(user);
+        } else {
+          showToast('Kredensial Vault Salah / Tidak Ditemukan!', 'error');
+          playSfx('error');
+        }
+      };
+    }
+
+    function saveSessionAndInitialize(user) {
+      currentUser = user;
+      sessionStorage.setItem('new_cyber_user', JSON.stringify(user));
+      showToast(`Akses Diterima! Selamat datang ${user.fullName}`, 'success');
+      playSfx('success');
+      renderDashboard();
+    }
+
+    function checkExistingSession() {
+      const saved = sessionStorage.getItem('new_cyber_user');
+      if (saved) {
+        currentUser = JSON.parse(saved);
+        renderDashboard();
+      } else {
+        renderHeaderAuthBar(false);
+      }
+    }
+
+    function handleLogout() {
+      playSfx('click');
+      currentUser = null;
+      sessionStorage.removeItem('new_cyber_user');
+      document.getElementById('vaultDashboard').classList.add('hidden');
+      document.getElementById('authSection').classList.remove('hidden');
+      renderHeaderAuthBar(false);
+      showToast('Sesi Terenkripsi Ditutup.', 'info');
+    }
+
+    function showForgotPasswordModal() {
+      playSfx('click');
+      document.getElementById('forgotPasswordModal').classList.remove('hidden');
+    }
+    function closeForgotPasswordModal() {
+      document.getElementById('forgotPasswordModal').classList.add('hidden');
+    }
+
+    function handleResetPassword(e) {
+      e.preventDefault();
+      const username = document.getElementById('resetUsername').value.trim().toLowerCase();
+      const newPass = document.getElementById('resetNewPass').value;
+
+      const tx = db.transaction('users', 'readwrite');
+      const store = tx.objectStore('users');
+      const getReq = store.get(username);
+
+      getReq.onsuccess = () => {
+        if (!getReq.result) {
+          showToast('Username tidak ditemukan di database.', 'error');
+          playSfx('error');
+          return;
+        }
+        const user = getReq.result;
+        user.password = newPass;
+        store.put(user);
+        showToast('Passcode berhasil diperbarui! Silakan Login.', 'success');
+        playSfx('success');
+        closeForgotPasswordModal();
+      };
+    }
+
+    function renderDashboard() {
+      document.getElementById('authSection').classList.add('hidden');
+      document.getElementById('vaultDashboard').classList.remove('hidden');
+
+      document.getElementById('userDisplayName').innerText = currentUser.fullName;
+      document.getElementById('userIdText').innerText = `ID Akses: ${currentUser.accessId || 'NCI-9900-OBSIDIAN'}`;
+      document.getElementById('userAvatarImg').src = currentUser.avatar;
+
+      renderHeaderAuthBar(true);
+      loadVaultFiles();
+    }
+
+    function renderHeaderAuthBar(isLoggedIn) {
+      const bar = document.getElementById('authHeaderBar');
+      if (isLoggedIn) {
+        bar.innerHTML = `
+          <div class="flex items-center gap-3">
+            <img src="${currentUser.avatar}" class="w-8 h-8 rounded-lg object-cover border border-cyber-cyan">
+            <span class="text-xs font-mono font-bold text-white hidden sm:inline">${currentUser.fullName}</span>
+            <button onclick="handleLogout()" class="px-3 py-1.5 bg-cyber-pink/20 border border-cyber-pink text-cyber-pink hover:bg-cyber-pink hover:text-white rounded-lg text-xs font-mono transition-all">
+              <i class="fa-solid fa-power-off"></i>
+            </button>
+          </div>
+        `;
+      } else {
+        bar.innerHTML = `
+          <button onclick="switchAuthTab('login')" class="px-4 py-1.5 bg-cyber-cyan/10 border border-cyber-cyan text-cyber-cyan hover:bg-cyber-cyan hover:text-obsidian rounded-lg text-xs font-mono transition-all font-bold">
+            MASUK VAULT
+          </button>
+        `;
+      }
+    }
+
+    function openAvatarModal() {
+      playSfx('click');
+      document.getElementById('avatarModal').classList.remove('hidden');
+    }
+    function closeAvatarModal() {
+      document.getElementById('avatarModal').classList.add('hidden');
+    }
+
+    function selectPresetAvatar(src) {
+      updateUserAvatar(src);
+    }
+
+    function uploadCustomAvatar(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (evt) => updateUserAvatar(evt.target.result);
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function updateUserAvatar(newAvatarUrl) {
+      currentUser.avatar = newAvatarUrl;
+      document.getElementById('userAvatarImg').src = newAvatarUrl;
+      sessionStorage.setItem('new_cyber_user', JSON.stringify(currentUser));
+
+      const tx = db.transaction('users', 'readwrite');
+      const store = tx.objectStore('users');
+      store.put(currentUser);
+
+      renderHeaderAuthBar(true);
+      closeAvatarModal();
+      showToast('Foto Profil Berhasil Diperbarui!', 'success');
+      playSfx('success');
+    }
+
+    function openChangePasswordModal() {
+      playSfx('click');
+      document.getElementById('changePasswordModal').classList.remove('hidden');
+    }
+    function closeChangePasswordModal() {
+      document.getElementById('changePasswordModal').classList.add('hidden');
+    }
+
+    function handleChangePassword(e) {
+      e.preventDefault();
+      const currPass = document.getElementById('currPassInput').value;
+      const newPass = document.getElementById('newPassInput').value;
+
+      const tx = db.transaction('users', 'readwrite');
+      const store = tx.objectStore('users');
+      const getReq = store.get(currentUser.username);
+
+      getReq.onsuccess = () => {
+        const user = getReq.result;
+        if (user && user.password !== currPass) {
+          showToast('Kata sandi saat ini tidak cocok!', 'error');
+          playSfx('error');
+          return;
+        }
+        if (user) {
+          user.password = newPass;
+          store.put(user);
+        }
+        showToast('Kata sandi Sesi Berhasil Diperbarui!', 'success');
+        playSfx('success');
+        closeChangePasswordModal();
+      };
+    }
+
+    // Vault File Operations (IndexedDB)
+    function loadVaultFiles() {
+      if (!db) return;
+      const tx = db.transaction('files', 'readonly');
+      const store = tx.objectStore('files');
+      const getReq = store.getAll();
+
+      getReq.onsuccess = () => {
+        vaultFiles = getReq.result.filter(f => f.owner === currentUser.username);
+        updateStorageCapacityMeter();
+        renderFileList();
+      };
+    }
+
+    function updateStorageCapacityMeter() {
+      const usedBytes = vaultFiles.reduce((acc, file) => acc + (file.size || 0), 0);
+      const usedPercent = ((usedBytes / TOTAL_STORAGE_BYTES) * 100).toFixed(4);
+
+      document.getElementById('headerStorageUsed').innerText = formatBytes(usedBytes);
+      document.getElementById('usedCapacityText').innerText = formatBytes(usedBytes);
+      document.getElementById('freeCapacityText').innerText = formatBytes(TOTAL_STORAGE_BYTES - usedBytes);
+      document.getElementById('storagePercentText').innerText = usedPercent + '%';
+      document.getElementById('storageProgressBar').style.width = Math.max(usedPercent, 1) + '%';
+    }
+
+    function uploadFiles(files) {
+      if (!files || files.length === 0) return;
+      playSfx('upload');
+
+      const tx = db.transaction('files', 'readwrite');
+      const store = tx.objectStore('files');
+
+      Array.from(files).forEach(file => {
+        const fileObj = {
+          id: 'FILE_' + Date.now() + '_' + Math.floor(Math.random()*1000),
+          owner: currentUser.username,
+          name: file.name,
+          size: file.size,
+          type: getFileTypeCategory(file.type, file.name),
+          mimeType: file.type,
+          uploadDate: new Date().toISOString(),
+          blob: file
+        };
+        store.add(fileObj);
+        vaultFiles.push(fileObj);
+      });
+
+      tx.oncomplete = () => {
+        updateStorageCapacityMeter();
+        renderFileList();
+        showToast(`${files.length} Berkas berhasil terenkripsi ke Vault!`, 'success');
+      };
+    }
+
+    function getFileTypeCategory(mime, filename) {
+      if (mime.startsWith('image/')) return 'image';
+      if (mime.startsWith('video/')) return 'video';
+      if (mime.startsWith('audio/')) return 'audio';
+      if (mime.startsWith('text/') || filename.endsWith('.txt') || filename.endsWith('.json') || filename.endsWith('.md')) return 'document';
+      return 'other';
+    }
+
+    function renderFileList() {
+      const grid = document.getElementById('fileGrid');
+      const emptyMsg = document.getElementById('emptyVaultMsg');
+      const searchQuery = document.getElementById('fileSearchInput').value.toLowerCase();
+      const sortBy = document.getElementById('sortSelect').value;
+
+      grid.innerHTML = '';
+
+      let filtered = vaultFiles.filter(f => {
+        const matchesCat = (currentFilterCategory === 'all') || (f.type === currentFilterCategory);
+        const matchesSearch = f.name.toLowerCase().includes(searchQuery);
+        return matchesCat && matchesSearch;
+      });
+
+      filtered.sort((a, b) => {
+        if (sortBy === 'newest') return new Date(b.uploadDate) - new Date(a.uploadDate);
+        if (sortBy === 'oldest') return new Date(a.uploadDate) - new Date(b.uploadDate);
+        if (sortBy === 'size') return b.size - a.size;
+        if (sortBy === 'name') return a.name.localeCompare(b.name);
+      });
+
+      if (filtered.length === 0) {
+        emptyMsg.classList.remove('hidden');
+        return;
+      } else {
+        emptyMsg.classList.add('hidden');
+      }
+
+      filtered.forEach(file => {
+        const card = document.createElement('div');
+        card.className = "bg-obsidian-card border border-slate-800 hover:border-cyber-cyan rounded-xl p-4 flex flex-col justify-between group transition-all hover:shadow-neon-cyan relative overflow-hidden";
+
+        let iconClass = 'fa-file-code text-cyber-cyan';
+        if (file.type === 'image') iconClass = 'fa-file-image text-cyber-pink';
+        if (file.type === 'video') iconClass = 'fa-file-video text-cyber-purple';
+        if (file.type === 'audio') iconClass = 'fa-file-audio text-cyber-yellow';
+        if (file.type === 'document') iconClass = 'fa-file-lines text-cyber-green';
+
+        card.innerHTML = `
+          <div class="flex items-start gap-3">
+            <div class="w-10 h-10 rounded-lg bg-obsidian border border-slate-700 flex items-center justify-center text-lg flex-shrink-0 group-hover:border-cyber-cyan transition-colors">
+              <i class="fa-solid ${iconClass}"></i>
+            </div>
+            <div class="overflow-hidden">
+              <h4 class="font-orbitron font-semibold text-xs text-white truncate hover:text-cyber-cyan cursor-pointer" onclick="openMediaViewer('${file.id}')" title="${file.name}">
+                ${file.name}
+              </h4>
+              <p class="text-[11px] font-mono text-slate-400 mt-1">${formatBytes(file.size)} • ${new Date(file.uploadDate).toLocaleDateString('id-ID')}</p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between mt-4 pt-3 border-t border-slate-800/80 text-xs font-mono">
+            <button onclick="openMediaViewer('${file.id}')" class="text-cyber-cyan hover:underline flex items-center gap-1">
+              <i class="fa-solid fa-expand"></i> Buka
+            </button>
+            <div class="flex gap-2">
+              <button onclick="downloadFile('${file.id}')" class="p-1.5 text-slate-400 hover:text-white" title="Unduh">
+                <i class="fa-solid fa-download"></i>
+              </button>
+              <button onclick="deleteFile('${file.id}')" class="p-1.5 text-slate-400 hover:text-cyber-pink" title="Hapus">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function filterVault(category) {
+      playSfx('click');
+      currentFilterCategory = category;
+      document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.className = "cat-btn px-3 py-1 text-xs font-mono rounded-lg bg-obsidian border border-slate-800 text-slate-300";
+      });
+      event.target.className = "cat-btn px-3 py-1 text-xs font-mono rounded-lg bg-cyber-cyan text-obsidian font-bold";
+      renderFileList();
+    }
+
+    function deleteFile(fileId) {
+      if (!confirm('Hapus berkas terenkripsi ini dari Vault?')) return;
+      playSfx('click');
+
+      const tx = db.transaction('files', 'readwrite');
+      const store = tx.objectStore('files');
+      store.delete(fileId);
+
+      tx.oncomplete = () => {
+        vaultFiles = vaultFiles.filter(f => f.id !== fileId);
+        updateStorageCapacityMeter();
+        renderFileList();
+        showToast('Berkas telah dihapus dari storage.', 'info');
+      };
+    }
+
+    function downloadFile(fileId) {
+      const file = vaultFiles.find(f => f.id === fileId);
+      if (!file) return;
+      playSfx('click');
+
+      const url = URL.createObjectURL(file.blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = file.name;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function handleDragOver(e) { e.preventDefault(); e.currentTarget.classList.add('border-cyber-cyan'); }
+    function handleDragLeave(e) { e.preventDefault(); e.currentTarget.classList.remove('border-cyber-cyan'); }
+    function handleFileDrop(e) {
+      e.preventDefault();
+      e.currentTarget.classList.remove('border-cyber-cyan');
+      if (e.dataTransfer.files) uploadFiles(e.dataTransfer.files);
+    }
+
+    // Multi-Media Viewer Functions
+    let currentAudioContext, audioAnalyser, audioSource, visualizerAnimationId;
+
+    function openMediaViewer(fileId) {
+      const file = vaultFiles.find(f => f.id === fileId);
+      if (!file) return;
+      playSfx('click');
+
+      const modal = document.getElementById('mediaViewerModal');
+      document.getElementById('viewerTitle').innerText = file.name;
+      document.getElementById('viewerMeta').innerText = `Ukuran: ${formatBytes(file.size)} | Tipe: ${file.mimeType || file.type}`;
+      document.getElementById('viewerDownloadBtn').onclick = () => downloadFile(file.id);
+
+      document.getElementById('photoViewer').classList.add('hidden');
+      document.getElementById('videoViewer').classList.add('hidden');
+      document.getElementById('audioViewer').classList.add('hidden');
+      document.getElementById('documentViewer').classList.add('hidden');
+
+      const fileUrl = URL.createObjectURL(file.blob);
+
+      if (file.type === 'image') {
+        const img = document.getElementById('photoElem');
+        img.src = fileUrl;
+        photoZoomScale = 1;
+        photoRotationDeg = 0;
+        updatePhotoTransform();
+        document.getElementById('photoViewer').classList.remove('hidden');
+      } 
+      else if (file.type === 'video') {
+        const vid = document.getElementById('videoElem');
+        vid.src = fileUrl;
+        document.getElementById('videoViewer').classList.remove('hidden');
+      } 
+      else if (file.type === 'audio') {
+        const aud = document.getElementById('audioElem');
+        aud.src = fileUrl;
+        document.getElementById('audioViewer').classList.remove('hidden');
+        setupAudioVisualizer(aud);
+      } 
+      else {
+        document.getElementById('documentViewer').classList.remove('hidden');
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          document.getElementById('documentTextContent').innerText = e.target.result;
+        };
+        reader.readAsText(file.blob);
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeMediaViewer() {
+      playSfx('click');
+      const modal = document.getElementById('mediaViewerModal');
+      modal.classList.add('hidden');
+
+      document.getElementById('videoElem').pause();
+      document.getElementById('audioElem').pause();
+      if (visualizerAnimationId) cancelAnimationFrame(visualizerAnimationId);
+    }
+
+    function adjustPhotoZoom(delta) {
+      photoZoomScale = Math.max(0.4, photoZoomScale + delta);
+      updatePhotoTransform();
+    }
+    function rotatePhoto() {
+      photoRotationDeg += 90;
+      updatePhotoTransform();
+    }
+    function updatePhotoTransform() {
+      document.getElementById('photoElem').style.transform = `scale(${photoZoomScale}) rotate(${photoRotationDeg}deg)`;
+    }
+
+    function setupAudioVisualizer(audioElem) {
+      const canvas = document.getElementById('audioVisualizerCanvas');
+      const canvasCtx = canvas.getContext('2d');
+
+      if (!currentAudioContext) {
+        currentAudioContext = new (window.AudioContext || window.webkitAudioContext)();
+        audioAnalyser = currentAudioContext.createAnalyser();
+        audioSource = currentAudioContext.createMediaElementSource(audioElem);
+        audioSource.connect(audioAnalyser);
+        audioAnalyser.connect(currentAudioContext.destination);
+      }
+
+      audioAnalyser.fftSize = 128;
+      const bufferLength = audioAnalyser.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+
+      function renderFrame() {
+        visualizerAnimationId = requestAnimationFrame(renderFrame);
+        audioAnalyser.getByteFrequencyData(dataArray);
+
+        canvasCtx.fillStyle = '#02040a';
+        canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+
+        const barWidth = (canvas.width / bufferLength) * 2.5;
+        let x = 0;
+
+        for (let i = 0; i < bufferLength; i++) {
+          const barHeight = (dataArray[i] / 255) * canvas.height;
+          canvasCtx.fillStyle = `hsl(${180 + i * 4}, 100%, 50%)`;
+          canvasCtx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+          x += barWidth + 1;
+        }
+      }
+      renderFrame();
+    }
+
+    // Link Beautifier & QR Code Generator
+    function generateBeautifulLink(e) {
+      e.preventDefault();
+      playSfx('click');
+
+      const original = document.getElementById('originalUrlInput').value;
+      const alias = document.getElementById('customAliasInput').value.trim().toLowerCase().replace(/\s+/g, '-');
+
+      const beautified = `https://newcyberidentity.link/${alias}`;
+      document.getElementById('beautifiedOutput').value = beautified;
+      document.getElementById('beautifiedResultBox').classList.remove('hidden');
+
+      showToast('Link Cyber Beautified Berhasil Dibuat!', 'success');
+      playSfx('success');
+    }
+
+    function generateCyberQR() {
+      playSfx('click');
+      const text = document.getElementById('qrTextInput').value || 'https://newcyberidentity.cyber.vault';
+      const wrapper = document.getElementById('qrSvgWrapper');
+
+      const size = 200;
+      const grid = 12;
+      const cellSize = size / grid;
+
+      let rects = '';
+      for (let r = 0; r < grid; r++) {
+        for (let c = 0; c < grid; c++) {
+          const isCorner = (r < 3 && c < 3) || (r < 3 && c > grid - 4) || (r > grid - 4 && c < 3);
+          const active = isCorner || Math.random() > 0.45;
+
+          if (active) {
+            const fill = isCorner ? '#00f0ff' : '#ff007f';
+            rects += `<rect x="${c * cellSize}" y="${r * cellSize}" width="${cellSize - 1.5}" height="${cellSize - 1.5}" fill="${fill}" rx="2" />`;
+          }
+        }
+      }
+
+      const svgContent = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+          <rect width="100%" height="100%" fill="#02040a" />
+          ${rects}
+          <circle cx="${size/2}" cy="${size/2}" r="15" fill="#02040a" stroke="#00f0ff" stroke-width="2"/>
+          <text x="${size/2}" y="${size/2 + 3}" fill="#00f0ff" font-size="7" font-family="Orbitron" text-anchor="middle">NCI</text>
+        </svg>
+      `;
+
+      wrapper.innerHTML = svgContent;
+      showToast('Holographic QR Code Tergenerasi!', 'success');
+    }
+
+    function downloadQrSvg() {
+      playSfx('click');
+      const svg = document.getElementById('qrSvgWrapper').innerHTML;
+      const blob = new Blob([svg], { type: 'image/svg+xml' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'New_Cyber_Identity_QR.svg';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // Navigation & Helpers
+    function switchMainTab(tab) {
+      playSfx('click');
+      const v = document.getElementById('tabContentVault');
+      const b = document.getElementById('tabContentBeautifier');
+      const q = document.getElementById('tabContentQr');
+
+      const btnV = document.getElementById('navVaultBtn');
+      const btnB = document.getElementById('navBeautifierBtn');
+      const btnQ = document.getElementById('navQrBtn');
+
+      v.classList.add('hidden');
+      b.classList.add('hidden');
+      q.classList.add('hidden');
+
+      btnV.className = "px-5 py-2.5 rounded-lg bg-obsidian border border-slate-800 text-slate-400 hover:text-white transition-all";
+      btnB.className = "px-5 py-2.5 rounded-lg bg-obsidian border border-slate-800 text-slate-400 hover:text-white transition-all";
+      btnQ.className = "px-5 py-2.5 rounded-lg bg-obsidian border border-slate-800 text-slate-400 hover:text-white transition-all";
+
+      if (tab === 'vault') {
+        v.classList.remove('hidden');
+        btnV.className = "px-5 py-2.5 rounded-lg bg-cyber-cyan/20 border border-cyber-cyan text-cyber-cyan font-bold transition-all";
+      } else if (tab === 'beautifier') {
+        b.classList.remove('hidden');
+        btnB.className = "px-5 py-2.5 rounded-lg bg-cyber-cyan/20 border border-cyber-cyan text-cyber-cyan font-bold transition-all";
+      } else if (tab === 'qr') {
+        q.classList.remove('hidden');
+        btnQ.className = "px-5 py-2.5 rounded-lg bg-cyber-pink/20 border border-cyber-pink text-cyber-pink font-bold transition-all";
+        generateCyberQR();
+      }
+    }
+
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+
+      let borderCol = 'border-cyber-cyan text-cyber-cyan';
+      if (type === 'error') borderCol = 'border-cyber-pink text-cyber-pink';
+      if (type === 'success') borderCol = 'border-cyber-green text-cyber-green';
+
+      toast.className = `p-4 bg-obsidian-card/90 backdrop-blur-md border ${borderCol} rounded-xl shadow-lg font-mono text-xs flex items-center justify-between gap-3 pointer-events-auto transform translate-x-10 transition-all duration-300`;
+      toast.innerHTML = `
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>${message}</span>
+        </div>
+        <button onclick="this.parentElement.remove()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+      `;
+
+      container.appendChild(toast);
+      setTimeout(() => toast.classList.remove('translate-x-10'), 10);
+      setTimeout(() => {
+        toast.classList.add('opacity-0');
+        setTimeout(() => toast.remove(), 300);
+      }, 4000);
+    }
+
+    function formatBytes(bytes, decimals = 2) {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const dm = decimals < 0 ? 0 : decimals;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+    }
+
+    function copyToClipboard(elemId) {
+      const copyText = document.getElementById(elemId);
+      copyText.select();
+      document.execCommand('copy');
+      showToast('Berhasil disalin ke clipboard!', 'success');
+      playSfx('success');
+    }
+  </script>
+</body>
+</html>
