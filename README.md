@@ -1,2 +1,2 @@
 # NEW-_CYBER_IDENTITY
-Website untuk memasuka file berupa media , lagu , video , dokumen dan sebagainya
+Website untuk memasukan file berupa media , lagu , video , dokumen dan sebagainya
